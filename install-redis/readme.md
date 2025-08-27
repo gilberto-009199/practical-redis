@@ -1,12 +1,18 @@
 > Eu,
 > Nessa pratica nós sempre usaremos o docker
 > Mas pode fazer com o redis cloud e conectar com a extenção [redis-vscode](https://redis.io/docs/latest/develop/tools/#redis-vscode-extension) ou [redis-insight](https://redis.io/docs/latest/develop/tools/#redis-insight).
-> Vamos usar o redis-for-vscode ou o redis-cli.
+> Vamos usar o redis-for-vscode ou o redis-cli. Use:
+```bash
+sudo docker run --name my-redis -p 6379:6379 -d redis 
+```
 
 <img src="redis-insight.png" alt="redis-insight image gui" width="256px" /><img src="redis-vscode.png" alt="redis-vscode extension image use tab" width="256px"/>
 
 
 # Implantando o Redis
+
+> Resumido e/ou Traduzido do livro.
+> Obrigado GPT!!!
 
 Você pode instalar o Redis da seguinte forma:
 
