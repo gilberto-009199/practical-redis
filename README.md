@@ -1,8 +1,9 @@
-# Practical Redis
+# Pratica Redis
 
-Content in Practical:
+Conteudo da Pratica:
 
- + 1° [Install Redis](./install-redis) - how install redis;
+ + 1° [Install Redis](./install-redis) - Como instalar o redis;
+ 
 
 <!--
 **UNDER CONSTRUCTION**:
