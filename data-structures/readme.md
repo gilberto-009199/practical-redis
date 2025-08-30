@@ -3,9 +3,13 @@
 > Resumido do livro.
 > Obrigado GPT!!!
 
-No Redis, tudo é armazenado como **chaves** que apontam para **valores**. As chaves podem ser qualquer dado binário (até uma imagem!), mas normalmente são textos simples.
+No Redis, tudo é armazenado como **chaves** que apontam para **valores**.
+As chaves podem ser qualquer dado binário (até uma imagem!), mas normalmente são textos simples.
 
 ### Comandos Fundamentais:
+
+Comandos basicos: `SET` e `GET`.
+
 ```redis
 SET usuario "João"     # Armazena o valor
 GET usuario           # Retorna "João"
@@ -13,24 +17,43 @@ GET usuario           # Retorna "João"
 
 ---
 
-## 🧵 1. Strings (Texto Simples)
-**Para que serve**: Valores simples, contadores, flags
+## 🧵 1. Strings
+
+**Para que serve**: 
 
 **Exemplos práticos**:
 ```redis
-SET contador 1        # Cria um contador
-INCR contador         # Incrementa para 2
-GET contador          # Retorna "2"
-
-SET status "ativo"    # Armazena um status
-SET bitmapa 1         # Para valores true/false (1/0)
+SET nome "gil"
+GET nome        # retorna "gil"
 ```
-
-**Limite**: 512MB por valor
 
 ---
 
-## 📃 2. Lists (Listas Ordenadas)
+## 🧵 2. Inteiros
+
+**Para que serve**:  
+
+**Exemplos práticos**:
+```redis
+
+```
+
+---
+
+
+## 🧵 3. bitmaps
+
+**Para que serve**: 
+
+**Exemplos práticos**:
+
+```redis
+
+```
+
+---
+
+## 📃 4. Lists (Listas Ordenadas)
 **Para que serve**: Filas, histórico, timelines
 
 **Como funciona**: Como uma fila dupla (adiciona no início ou fim)
@@ -47,7 +70,7 @@ LINDEX tarefas 0              # Pega primeiro item
 
 ---
 
-## 🎯 3. Sets (Conjuntos Únicos)
+## 🎯 5. Sets (Conjuntos Únicos)
 **Para que serve**: Membros únicos, tags, seguidores
 
 **Exemplos**:
@@ -61,7 +84,7 @@ SISMEMBER tags "redis"             # Verifica se existe → retorna 1
 
 ---
 
-## 🗃️ 4. Hashes (Tabelas Hash)
+## 🗃️ 6. Hashes (Tabelas Hash)
 **Para que serve**: Objetos com múltiplos atributos (usuários, produtos)
 
 **Exemplo prático - Perfil de usuário**:
@@ -75,7 +98,7 @@ HGETALL usuario:123            # Retorna todos campos
 
 ---
 
-## 🏆 5. Sorted Sets (Conjuntos Ordenados)
+## 🏆 7. Sorted Sets (Conjuntos Ordenados)
 **Para que serve**: Rankings, leaderboards, prioridades
 
 **Exemplo - Ranking de Jogadores**:
@@ -89,7 +112,7 @@ ZINCRBY ranking 100 "Pedro"        # Aumenta pontuação
 
 ---
 
-## 📊 6. HyperLogLog (Contagem Aproximada)
+## 📊 8. HyperLogLog (Contagem Aproximada)
 **Para que serve**: Contar itens únicos de forma eficiente (usa pouca memória)
 
 **Exemplo - Visitantes Únicos**:
