@@ -3,26 +3,21 @@
 Conteudo da Pratica:
 
  + 1° [Install Redis](./install-redis) - Como instalar o redis;
- 
+ + 2° [Data Structures](./data-structures) - Estruturas de dados no Redis
 
-<!--
+
+
 **UNDER CONSTRUCTION**:
- + 2° Operators Simple
- + 2° Data Models
- + 2° Data Structures
- + 3° Redis Modules
- + 3° Operators Blocking
- + 4° List and Hash/Dict
- + 5° Sets
- + 6° Pub Sub
- + 7° Pipeline and Transactions
+ + 3° Patterns - Pub/Sub, GeoSpatial, Redis Streams
+ + 4° Redis Modules - Redis Search, Redis Graph, Redis TimeSeries
+ + 5° Pipeline and Transactions
  + 9° Strategy Cache in Production
  + 10° Secure in Production
- + 11° Monitor Redis  in Production
--->
+ + 11° Monitor Redis in Production
+
+<!-- 
 
 ## Faq
-<!-- 
 
 A need use in production free?
 R: yes
