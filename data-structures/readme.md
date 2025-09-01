@@ -146,13 +146,43 @@ SDIFF interesses:usuario:999 interesses:usuario:888  # Interesses exclusivos do 
 ---
 
 ##  6. Hashes (Tabelas Hash)
-**Para que serve**: Objetos com múltiplos atributos (usuários, produtos)
 
-**Exemplo prático - Perfil de usuário**:
+**Para que serve**: Objetos com múltiplos atributos (usuários, produtos). 
+Exemplos:
+ + Perfil de Usuário
+ + Produto em E-commerce
+ + Carrinho de Compras
+ + Configurações de Aplicação
+ + Estatísticas de Sessão
+
 ```redis
-HSET usuario:123 nome "Maria" idade 28 cidade "SP"
-HGET usuario:123 nome          # Retorna "Maria"
-HGETALL usuario:123            # Retorna todos campos
+HSET usuario:123 nome "João Silva" email "joao@email.com" idade 28 cidade "São Paulo"
+HGET usuario:123 nome          # Retorna "João Silva"
+HGETALL usuario:123            # Retorna todos os campos e valores
+HINCRBY usuario:123 idade 1    # Incrementa idade para 29
+HDEL usuario:123 cidade        # Remove o campo cidade
+
+HSET produto:789 nome "Smartphone XYZ" preco 999.90 estoque 15 marca "Samsung"
+HGET produto:789 preco         # Retorna "999.90"
+HINCRBY produto:789 estoque -1 # Decrementa estoque para 14
+HSET produto:789 preco 899.90  # Atualiza preço
+HKEYS produto:789              # Retorna [nome, preco, estoque, marca]
+
+HSET carrinho:usuario:555 produto:789 2    # 2 unidades do produto 789
+HSET carrinho:usuario:555 produto:456 1    # 1 unidade do produto 456
+HINCRBY carrinho:usuario:555 produto:789 1 # Adiciona mais 1 unidade → 3
+HGETALL carrinho:usuario:555               # Mostra todo o carrinho
+HDEL carrinho:usuario:555 produto:456      # Remove produto do carrinho
+
+HSET config:app tema "escuro" idioma "pt-BR" notificacoes 1 timeout 30
+HGET config:app tema           # Retorna "escuro"
+HSETNX config:app tema "claro" # Só define se não existir (não altera)
+HSET config:app tema "claro"   # Força alteração para "claro"
+
+HSET sessao:abc pagina_views 15 tempo_total 3600 ultima_pagina "/home"
+HINCRBY sessao:abc pagina_views 1      # Incrementa para 16
+HINCRBY sessao:abc tempo_total 120     # Adiciona 2 minutos
+HGET sessao:abc ultima_pagina          # Retorna "/home"
 ```
 
 **Ideal para**: Dados estruturados que são acessados juntos

@@ -39,6 +39,8 @@ public class Main {
         new SetsExample().example(pool);
 
 
+
+
         pool.close();
         redis.stop();
         redis.close();
