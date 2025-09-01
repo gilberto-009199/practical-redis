@@ -35,7 +35,16 @@ public class Main {
         //new ListExample().example(pool);
 
         // Sets in Redis use
-        new SetsExample().example(pool);
+        //new SetsExample().example(pool);
+
+        // Hashes in Redis use
+        //new HashesExample().example(pool);
+
+        // SetsSorted in Redis use
+        new SetsSortedExample().example(pool);
+
+
+        //
 
 
         pool.close();
