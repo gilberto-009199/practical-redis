@@ -31,6 +31,9 @@ public class Main {
         // Bitmaps in Redis use
         new BitmapsExample().example(pool);
 
+        // List in Redis use
+        new ListExample().example(pool);
+
         pool.close();
         redis.stop();
         redis.close();
