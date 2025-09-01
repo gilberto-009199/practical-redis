@@ -16,11 +16,11 @@ public class SetsSortedExample implements Example {
 
             // Limpar dados anteriores
             jedis.del(
-                    "ranking",
-                    "vendas",
-                    "tarefas",
-                    "response",
-                    "ranking"
+                    "ranking:*",
+                    "vendas:*",
+                    "tarefas:*",
+                    "response:*",
+                    "ranking:*"
             );
 
             // 1. Ranking de Jogadores
@@ -107,9 +107,9 @@ public class SetsSortedExample implements Example {
 
             // Resumo final
             System.out.println("\n Resumo Final:");
-            System.out.println("Total jogadores no ranking: " + jedis.zcard("ranking"));
-            System.out.println("Produto com mais vendas: " + jedis.zrevrange("vendas:semana", 0, 0));
-            System.out.println("Tarefas restantes: " + jedis.zcard("tarefas:prioridade"));
+            System.out.println("+ Total jogadores no ranking: " + jedis.zcard("ranking"));
+            System.out.println("+ Produto com mais vendas: " + jedis.zrevrange("vendas:semana", 0, 0));
+            System.out.println("+ Tarefas restantes: " + jedis.zcard("tarefas:prioridade"));
 
         } catch (Exception e) {
             e.printStackTrace();

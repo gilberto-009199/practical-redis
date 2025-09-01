@@ -13,9 +13,9 @@ public class BitmapsExample implements Example {
 
             // Limpar dados anteriores para o exemplo
             jedis.del(
-                    "online",
-                    "feature",
-                    "cliques"
+                    "online:*",
+                    "feature:*",
+                    "cliques:*"
             );
 
             System.out.println("\n1. Status Online de Usuários:");
@@ -51,11 +51,11 @@ public class BitmapsExample implements Example {
 
             System.out.println("\n4. Dados do cache:");
 
-            System.out.println("Online - usuário 15: " + jedis.getbit("online", 15));
-            System.out.println("Online - usuário 23: " + jedis.getbit("online", 23));
-            System.out.println("VIP - usuário 5: " + jedis.getbit("feature:VIP", 5));
-            System.out.println("VIP - usuário 8: " + jedis.getbit("feature:VIP", 8));
-            System.out.println("Cliques - usuário 100: " + jedis.getbit("cliques:link1", 100));
+            System.out.println("+ Online - usuário 15: " + jedis.getbit("online", 15));
+            System.out.println("+ Online - usuário 23: " + jedis.getbit("online", 23));
+            System.out.println("+ VIP - usuário 5: " + jedis.getbit("feature:VIP", 5));
+            System.out.println("+ VIP - usuário 8: " + jedis.getbit("feature:VIP", 8));
+            System.out.println("+ Cliques - usuário 100: " + jedis.getbit("cliques:link1", 100));
 
         } catch (Exception e) {
             System.err.println("Erro no exemplo de bitmaps: " + e.getMessage());

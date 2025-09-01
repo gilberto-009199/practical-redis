@@ -15,13 +15,11 @@ public class SetsExample implements Example {
 
             // Limpar dados anteriores
             jedis.del(
-                    "seguidores",
-                    "artigo:",
-                    "artigo:",
-                    "grupo",
-                    "bloqueados",
-                    "interesses",
-                    "interesses"
+                    "seguidores:*",
+                    "artigo:*",
+                    "grupo:*",
+                    "bloqueados:*",
+                    "interesses:*"
             );
 
             // 1. Sistema de Seguidores
@@ -83,10 +81,10 @@ public class SetsExample implements Example {
 
             // Resumo final
             System.out.println("\n Resumo Final:");
-            System.out.println("Total seguidores Maria: " + jedis.scard("seguidores:maria"));
-            System.out.println("Tags artigo 123: " + jedis.smembers("artigo:123:tags"));
-            System.out.println("Tags artigo 456: " + jedis.smembers("artigo:456:tags"));
-            System.out.println("Usuários bloqueados: " + jedis.smembers("bloqueados:usuario:555"));
+            System.out.println("+ Total seguidores Maria: " + jedis.scard("seguidores:maria"));
+            System.out.println("+ Tags artigo 123: " + jedis.smembers("artigo:123:tags"));
+            System.out.println("+ Tags artigo 456: " + jedis.smembers("artigo:456:tags"));
+            System.out.println("+ Usuários bloqueados: " + jedis.smembers("bloqueados:usuario:555"));
 
         } catch (Exception e) {
             e.printStackTrace();

@@ -13,16 +13,16 @@ public class StringsExample implements Example {
 
             // Limpar dados anteriores
             jedis.del(
-                    "nome",
-                    "visitas",
-                    "preco",
-                    "produto",
-                    "visitas",
-                    "contador_pedidos",
-                    "estoque",
-                    "preco",
-                    "saldo",
-                    "usuario"
+                    "nome:*",
+                    "visitas:*",
+                    "preco:*",
+                    "produto:*",
+                    "visitas:*",
+                    "contador_pedidos:*",
+                    "estoque:*",
+                    "preco:*",
+                    "saldo:*",
+                    "usuario:*"
             );
 
             // SET - Armazena valores simples
@@ -86,15 +86,15 @@ public class StringsExample implements Example {
             nome = jedis.get("nome");
 
             System.out.println("Dados do cache:");
-            System.out.printf("\t Nome: %s \n", nome);
-            System.out.printf("\t Visitas: %s \n", visitas);
-            System.out.printf("\t Preço: %s \n", preco);
-            System.out.printf("\t Estoque: %s \n", estoque);
-            System.out.printf("\t Saldo: %s \n", saldo);
-            System.out.printf("\t Contador de Pedidos: %s \n", contadorPedidos);
-            System.out.printf("\t Produto: %s - R$ %s \n", produtoNome, produtoPreco);
-            System.out.printf("\t Tamanho do nome: %d \n", tamanhoNome);
-            System.out.printf("\t Parte do nome (0-2): %s \n", parteNome);
+            System.out.printf("+ Nome: %s \n", nome);
+            System.out.printf("+ Visitas: %s \n", visitas);
+            System.out.printf("+ Preço: %s \n", preco);
+            System.out.printf("+ Estoque: %s \n", estoque);
+            System.out.printf("+ Saldo: %s \n", saldo);
+            System.out.printf("+ Contador de Pedidos: %s \n", contadorPedidos);
+            System.out.printf("+ Produto: %s - R$ %s \n", produtoNome, produtoPreco);
+            System.out.printf("+ Tamanho do nome: %d \n", tamanhoNome);
+            System.out.printf("+ Parte do nome (0-2): %s \n", parteNome);
 
             System.out.println("\nDados do usuário (MSET/MGET):");
             for (int i = 0; i < usuarioDados.size(); i++) {

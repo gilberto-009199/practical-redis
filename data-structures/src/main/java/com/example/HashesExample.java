@@ -15,11 +15,11 @@ public class HashesExample implements Example {
 
             // Limpar dados anteriores
             redis.del(
-                    "usuario",
-                    "produto",
-                    "carrinho",
-                    "config",
-                    "sessao"
+                    "usuario:*",
+                    "produto:*",
+                    "carrinho:*",
+                    "config:*",
+                    "sessao:*"
             );
 
             // 1. Perfil de Usuário

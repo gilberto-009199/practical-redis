@@ -26,25 +26,25 @@ public class Main {
         var pool = new JedisPool(redisHost, redisPort);
 
         // Strings in Redis use
-        //new StringsExample().example(pool);
+        new StringsExample().example(pool);
 
         // Bitmaps in Redis use
-        //new BitmapsExample().example(pool);
+        new BitmapsExample().example(pool);
 
         // List in Redis use
-        //new ListExample().example(pool);
+        new ListExample().example(pool);
 
         // Sets in Redis use
-        //new SetsExample().example(pool);
+        new SetsExample().example(pool);
 
         // Hashes in Redis use
-        //new HashesExample().example(pool);
+        new HashesExample().example(pool);
 
         // SetsSorted in Redis use
         new SetsSortedExample().example(pool);
 
-
-        //
+        // HyperLogLogs in Redis use
+        new HyperLogLogExample().example(pool);
 
 
         pool.close();

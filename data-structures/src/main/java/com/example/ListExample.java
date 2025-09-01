@@ -15,9 +15,9 @@ public class ListExample implements Example {
 
             // Limpar dados anteriores
             jedis.del(
-                    "tarefas",
-                    "chat",
-                    "posts:recent");
+                    "tarefas:*",
+                    "chat:*",
+                    "posts:*");
 
             // 1. Sistema de Fila de Tarefas
             System.out.println("1.  Sistema de Fila de Tarefas:");
@@ -72,9 +72,9 @@ public class ListExample implements Example {
 
             // Demonstrando todas as operações
             System.out.println("\n Resumo Final:");
-            System.out.println("Tarefas pendentes: " + jedis.llen("tarefas:pending"));
-            System.out.println("Mensagens no chat: " + jedis.llen("chat:room1"));
-            System.out.println("Posts na timeline: " + jedis.llen("posts:recent"));
+            System.out.println("+ Tarefas pendentes: " + jedis.llen("tarefas:pending"));
+            System.out.println("+ Mensagens no chat: " + jedis.llen("chat:room1"));
+            System.out.println("+ Posts na timeline: " + jedis.llen("posts:recent"));
 
         } catch (Exception e) {
             e.printStackTrace();
