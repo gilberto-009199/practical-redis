@@ -9,67 +9,67 @@ public class StringsExample implements Example {
     public void example(JedisPool pool) {
         System.out.println("\n=== Exemplos de String ===\n");
 
-        try (var redis = pool.getResource()) {
+        try (var jedis = pool.getResource()) {
 
             // SET - Armazena valores simples
-            redis.set("nome", "gil");
-            redis.set("visitas", "100");
-            redis.set("preco", "10.10");
-            redis.set("produto:1:nome", "Notebook Gamer");
-            redis.set("produto:1:preco", "2500.00");
+            jedis.set("nome", "gil");
+            jedis.set("visitas", "100");
+            jedis.set("preco", "10.10");
+            jedis.set("produto:1:nome", "Notebook Gamer");
+            jedis.set("produto:1:preco", "2500.00");
 
             // INCR - Incrementa em 1 (valor inteiro)
-            redis.incr("visitas");
-            redis.incr("visitas");
+            jedis.incr("visitas");
+            jedis.incr("visitas");
 
             // INCRBY - Incrementa por um valor específico (inteiro)
-            redis.incrBy("visitas", 5);
-            redis.incrBy("contador_pedidos", 3);
+            jedis.incrBy("visitas", 5);
+            jedis.incrBy("contador_pedidos", 3);
 
             // DECR - Decrementa em 1 (valor inteiro)
-            redis.decr("estoque");
-            redis.decr("estoque");
+            jedis.decr("estoque");
+            jedis.decr("estoque");
 
             // DECRBY - Decrementa por um valor específico (inteiro)
-            redis.decrBy("estoque", 5);
+            jedis.decrBy("estoque", 5);
 
             // INCRBYFLOAT - Incrementa por um valor float/decimal
-            redis.incrByFloat("preco", 2.50);
-            redis.incrByFloat("saldo", 100.75);
+            jedis.incrByFloat("preco", 2.50);
+            jedis.incrByFloat("saldo", 100.75);
 
             // GET - Recupera valores
-            var nome = redis.get("nome");
-            var visitas = redis.get("visitas");
-            var preco = redis.get("preco");
-            var estoque = redis.get("estoque");
-            var saldo = redis.get("saldo");
-            var contadorPedidos = redis.get("contador_pedidos");
-            var produtoNome = redis.get("produto:1:nome");
-            var produtoPreco = redis.get("produto:1:preco");
+            var nome = jedis.get("nome");
+            var visitas = jedis.get("visitas");
+            var preco = jedis.get("preco");
+            var estoque = jedis.get("estoque");
+            var saldo = jedis.get("saldo");
+            var contadorPedidos = jedis.get("contador_pedidos");
+            var produtoNome = jedis.get("produto:1:nome");
+            var produtoPreco = jedis.get("produto:1:preco");
 
             // MSET - Define múltiplos valores de uma vez
-            redis.mset(
+            jedis.mset(
                     "usuario:1:nome", "Ana Silva",
                     "usuario:1:email", "ana@email.com",
                     "usuario:1:idade", "28"
             );
 
             // MGET - Recupera múltiplos valores de uma vez
-            var usuarioDados = redis.mget("usuario:1:nome", "usuario:1:email", "usuario:1:idade");
+            var usuarioDados = jedis.mget("usuario:1:nome", "usuario:1:email", "usuario:1:idade");
 
             // STRLEN - Obtém o tamanho da string
-            var tamanhoNome = redis.strlen("nome");
+            var tamanhoNome = jedis.strlen("nome");
 
             // APPEND - Adiciona texto ao final de uma string existente
-            redis.append("nome", "berto"); // Nome se torna "gilberto"
+            jedis.append("nome", "berto"); // Nome se torna "gilberto"
 
             // GETRANGE - Obtém parte de uma string
-            var parteNome = redis.getrange("nome", 0, 2); // "gil"
+            var parteNome = jedis.getrange("nome", 0, 2); // "gil"
 
             // SETRANGE - Substitui parte de uma string
-            redis.setrange("nome", 3, "son"); // Nome se torna "gilson"
+            jedis.setrange("nome", 3, "son"); // Nome se torna "gilson"
 
-            nome = redis.get("nome");
+            nome = jedis.get("nome");
 
             System.out.println("Dados do cache:");
             System.out.printf("\t Nome: %s \n", nome);
@@ -88,16 +88,16 @@ public class StringsExample implements Example {
             }
 
             // Comandos com tempo de expiração
-            redis.setex("sessao:usuario:123", 300, "token_abc123"); // Expira em 300 segundos (5 minutos)
-            redis.psetex("sessao_temporaria", 60000, "dados_temporarios"); // Expira em 60000 milissegundos (1 minuto)
+            jedis.setex("sessao:usuario:123", 300, "token_abc123"); // Expira em 300 segundos (5 minutos)
+            jedis.psetex("sessao_temporaria", 60000, "dados_temporarios"); // Expira em 60000 milissegundos (1 minuto)
 
             // SETNX - Define valor apenas se a chave não existir
-            Long resultadoSetNx = redis.setnx("chave_unica", "valor_unico");
+            Long resultadoSetNx = jedis.setnx("chave_unica", "valor_unico");
             System.out.printf("\t SETNX resultado: %d (1=definido, 0=já existia) \n", resultadoSetNx);
 
             // GETSET - Define novo valor e retorna o valor antigo
-            String antigoValor = redis.getSet("contador", "1000");
-            System.out.printf("\t GETSET - Valor antigo: %s, Novo valor: %s \n", antigoValor, redis.get("contador"));
+            String antigoValor = jedis.getSet("contador", "1000");
+            System.out.printf("\t GETSET - Valor antigo: %s, Novo valor: %s \n", antigoValor, jedis.get("contador"));
 
         } catch (Exception e) {
             System.err.println("Erro no exemplo de strings: " + e.getMessage());

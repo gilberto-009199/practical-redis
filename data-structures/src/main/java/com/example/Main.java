@@ -28,7 +28,8 @@ public class Main {
         // Strings in Redis use
         new StringsExample().example(pool);
 
-
+        // Bitmaps in Redis use
+        new BitmapsExample().example(pool);
 
         pool.close();
         redis.stop();
