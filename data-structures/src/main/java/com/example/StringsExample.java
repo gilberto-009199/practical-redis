@@ -11,6 +11,20 @@ public class StringsExample implements Example {
 
         try (var jedis = pool.getResource()) {
 
+            // Limpar dados anteriores
+            jedis.del(
+                    "nome",
+                    "visitas",
+                    "preco",
+                    "produto",
+                    "visitas",
+                    "contador_pedidos",
+                    "estoque",
+                    "preco",
+                    "saldo",
+                    "usuario"
+            );
+
             // SET - Armazena valores simples
             jedis.set("nome", "gil");
             jedis.set("visitas", "100");

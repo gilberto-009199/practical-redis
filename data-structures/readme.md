@@ -112,13 +112,33 @@ LTRIM posts:recent 0 9   # Mantém apenas os 10 posts mais recentes
 ---
 
 ##  5. Sets (Conjuntos Únicos)
-**Para que serve**: Membros únicos, tags, seguidores
+**Para que serve**: Membros de um grupo, tags de um artigo, seguidores de um influencer
 
 **Exemplos**:
 ```redis
-SADD tags "redis" "banco" "nosql"  # Adiciona tags
-SMEMBERS tags                      # Lista todas tags
-SISMEMBER tags "redis"             # Verifica se existe → retorna 1
+SADD seguidores:maria "joao" "pedro" "ana"  # Maria tem 3 seguidores
+SADD seguidores:maria "carla"               # Adiciona mais uma seguidora
+SISMEMBER seguidores:maria "joao"           # Verifica se João segue Maria → 1 (true)
+SMEMBERS seguidores:maria                   # Lista todos os seguidores de Maria
+SCARD seguidores:maria                      # Conta quantos seguidores Maria tem → 4
+
+SADD artigo:123:tags "tecnologia" "python" "programacao"
+SADD artigo:456:tags "tecnologia" "redis" "banco-de-dados"
+SINTER artigo:123:tags artigo:456:tags      # Tags em comum → "tecnologia"
+SUNION artigo:123:tags artigo:456:tags      # Todas as tags únicas
+
+SADD grupo:premium "usuario:789" "usuario:456"
+SADD grupo:vip "usuario:123" "usuario:789"
+SISMEMBER grupo:premium "usuario:789"       # Verifica se usuário está no grupo premium → 1
+SINTER grupo:premium grupo:vip              # Usuários que estão em AMBOS os grupos → "usuario:789"
+
+SADD bloqueados:usuario:555 "usuario:777" "usuario:888"
+SISMEMBER bloqueados:usuario:555 "usuario:777"  # Verifica se usuário 777 está bloqueado → 1
+SREM bloqueados:usuario:555 "usuario:888"   # Remove bloqueio do usuário 888
+
+SADD interesses:usuario:999 "futebol" "tecnologia" "musica"
+SADD interesses:usuario:888 "cinema" "tecnologia" "viagens"
+SDIFF interesses:usuario:999 interesses:usuario:888  # Interesses exclusivos do usuário 999
 ```
 
 **Diferença para Lists**: Não tem ordem e não permite duplicatas

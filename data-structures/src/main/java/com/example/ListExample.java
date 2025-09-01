@@ -14,7 +14,10 @@ public class ListExample implements Example {
             System.out.println("\n=== Exemplos de List ===\n");
 
             // Limpar dados anteriores
-            jedis.del("tarefas:pending", "chat:room1", "posts:recent");
+            jedis.del(
+                    "tarefas",
+                    "chat",
+                    "posts:recent");
 
             // 1. Sistema de Fila de Tarefas
             System.out.println("1.  Sistema de Fila de Tarefas:");

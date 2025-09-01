@@ -12,7 +12,11 @@ public class BitmapsExample implements Example {
         try (var jedis = pool.getResource()) {
 
             // Limpar dados anteriores para o exemplo
-            jedis.del("online", "feature:VIP", "cliques:link1");
+            jedis.del(
+                    "online",
+                    "feature",
+                    "cliques"
+            );
 
             System.out.println("\n1. Status Online de Usuários:");
 
