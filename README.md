@@ -4,7 +4,7 @@ Conteudo da Pratica:
 
  + 1° [Install Redis](./install-redis) - Como instalar o redis;
  + 2° [Data Structures](./data-structures) - Estruturas de dados no Redis, Strings, BitMaps, List, Sets, Hashes, 
-
+ + 3° [Patterns](./patterns) - Pub/Sub, GeoSpatial, Redis Streams
 
 
 **UNDER CONSTRUCTION**:
