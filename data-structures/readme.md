@@ -25,21 +25,19 @@ GET usuario           # Retorna "João"
 ```redis
 SET nome "gil"
 GET nome        # retorna "gil"
+SET visits 10     # Armazena a string "10"
+
+INCR visits       # Retorna (integer) 11 (e salva a string "11")
+INCRBY visits 5   # Retorna (integer) 16 (e salva a string "16")
+DECR visits       # Retorna (integer) 15 (e salva a string "15")
+GET visits        # Retorna "15" (uma string!)
+
+SET price 99.50   # Armazena a string "99.50"
+INCRBYFLOAT price 10.25 # Retorna "109.75" (uma string!)
+GET price         # Retorna "109.75" (uma string!)
 ```
 
 ---
-
-## 🧵 2. Inteiros
-
-**Para que serve**:  
-
-**Exemplos práticos**:
-```redis
-
-```
-
----
-
 
 ## 🧵 3. bitmaps
 
