@@ -190,13 +190,41 @@ HGET sessao:abc ultima_pagina          # Retorna "/home"
 ---
 
 ##  7. Sorted Sets (Conjuntos Ordenados)
-**Para que serve**: Rankings, leaderboards, prioridades
+**Para que serve**: Rankings competitivos onde a ordem importa e precisa ser atualizada frequentemente. Listas de Prioridades onde membro tem um score numérico que determina sua posição automática na prioridade.
+Exemplos:
++ Ranking de Jogadores
++ Leaderboard de Produtos Mais Vendidos
++ Sistema de Prioridade de Tarefas
++ Ranking por Tempo de Resposta
++ Sistema de Pontuação por Categoria
+
 
 **Exemplo - Ranking de Jogadores**:
 ```redis
-ZADD ranking 1500 "Ana" 1200 "Pedro" 1800 "Carlos"
-ZREVRANGE ranking 0 -1 WITHSCORES  # Ranking decrescente
-ZINCRBY ranking 100 "Pedro"        # Aumenta pontuação
+ZADD ranking 1000 "player1" 1500 "player2" 800 "player3"  # Adiciona jogadores com pontuação
+ZINCRBY ranking 200 "player3"  # Aumenta pontuação do player3 para 1000
+ZREVRANGE ranking 0 2 WITHSCORES  # Top 3 jogadores (maior para menor)
+ZRANGE ranking 0 -1 WITHSCORES    # Todos em ordem crescente
+ZRANK ranking "player2"           # Posição no ranking (0-based, crescente)
+ZREVRANK ranking "player2"        # Posição no ranking (0-based, decrescente)
+
+ZADD vendas:semana 150 "produto:A" 89 "produto:B" 200 "produto:C"
+ZINCRBY vendas:semana 50 "produto:B"  # produto:B agora tem 139 vendas
+ZREVRANGE vendas:semana 0 4 WITHSCORES  # Top 5 produtos mais vendidos
+ZSCORE vendas:semana "produto:C"      # Retorna 200 (vendas do produto C)
+
+ZADD tarefas:prioridade 1 "tarefa:baixa" 3 "tarefa:media" 5 "tarefa:alta" 10 "tarefa:critica"
+ZRANGEBYSCORE tarefas:prioridade 5 10  # Tarefas com prioridade 5 a 10 (alta e crítica)
+ZPOPMAX tarefas:prioridade             # Remove e retorna a tarefa mais prioritária
+
+ZADD response:times 120 "api:login" 45 "api:search" 300 "api:report"
+ZINCRBY response:times -10 "api:login"  # Melhora tempo para 110ms
+ZREVRANGEBYSCORE response:times 500 100  # APIs com tempo entre 100-500ms (piores)
+
+ZADD ranking:arcade 5000 "user:john" 7000 "user:sarah"
+ZADD ranking:strategy 3000 "user:john" 6000 "user:mike"
+ZUNIONSTORE ranking:total 2 ranking:arcade ranking:strategy AGGREGATE SUM
+ZREVRANGE ranking:total 0 -1 WITHSCORES  # Ranking combinado
 ```
 
 **Diferencial**: Valores únicos com scores numéricos para ordenação
