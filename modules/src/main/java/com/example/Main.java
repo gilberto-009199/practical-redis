@@ -25,7 +25,7 @@ public class Main {
 
         var pool = new JedisPool(redisHost, redisPort);
 
-        
+        new RedisSearch().example(pool);
 
 
         pool.close();

@@ -1,10 +1,10 @@
-# Modules no Redis
+# Modulos no Redis
 
 > Resumido do livro.
 > Obrigado GPT!!!
 
 Aqui estão os padrões do Redis:
-# Módulos no Redis - Guia Completo
+
 
 ## Resumo:
 
