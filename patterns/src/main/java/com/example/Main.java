@@ -28,6 +28,11 @@ public class Main {
         // PubSub in Redis use
         new PubSubExample().example(pool);
 
+        // Geospatial in Redis use
+        new GeospatialExample().example(pool);
+
+        // Redis Streams in Redis use
+        new RedisStreamsExample().example(pool);
 
         pool.close();
         redis.stop();
