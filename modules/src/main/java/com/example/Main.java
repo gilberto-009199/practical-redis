@@ -27,10 +27,13 @@ public class Main {
         var pool = new JedisPool(redisHost, redisPort);
 
         // 1. Redis Search example
-        new RedisSearchExample().example(pool);
+        //new RedisSearchExample().example(pool);
 
         // 2. Redis Graph Example
-        new RedisGraphExample().example(pool);
+        //new RedisGraphExample().example(pool);
+
+        // 3. Redis Time Series Example
+        new RedisTimeSeriesExample().example(pool);
 
         pool.close();
         redis.stop();
