@@ -18,7 +18,7 @@ public class RedisGraphExample implements Example {
 
             // Criar nós (usuários)
             System.out.println("Criando usuários...");
-            Object createUsers = jedis.sendCommand(
+            var createUsers = jedis.sendCommand(
                     () -> SafeEncoder.encode("GRAPH.QUERY"),
                     SafeEncoder.encode( "foodDelivery"),
                     // @Atenção Create precisa ser inteiro
@@ -34,7 +34,7 @@ public class RedisGraphExample implements Example {
 
             // Criar nós (restaurantes)
             System.out.println("Criando restaurantes...");
-            Object createRestaurants = jedis.sendCommand(
+            var createRestaurants = jedis.sendCommand(
                     () -> SafeEncoder.encode("GRAPH.QUERY"),
                     SafeEncoder.encode("foodDelivery"),
                     SafeEncoder.encode("CREATE " +
@@ -51,7 +51,7 @@ public class RedisGraphExample implements Example {
 
             // Criar relacionamentos de favoritos
             System.out.println("Criando relacionamentos de favoritos...");
-            Object createRelationships = jedis.sendCommand(
+            var createRelationships = jedis.sendCommand(
                     () -> SafeEncoder.encode("GRAPH.QUERY"),
                     SafeEncoder.encode("foodDelivery"),
                     SafeEncoder.encode("MATCH (u1:Usuario {id: 1}), (u2:Usuario {id: 2}), (u3:Usuario {id: 3}), " +
@@ -73,7 +73,7 @@ public class RedisGraphExample implements Example {
 
             // Consulta 1: Restaurantes favoritos de um usuário
             System.out.println("\n1. Restaurantes favoritos do João:");
-            Object userFavorites = jedis.sendCommand(
+            var userFavorites = jedis.sendCommand(
                     () -> SafeEncoder.encode("GRAPH.QUERY"),
                     SafeEncoder.encode("foodDelivery"),
                     SafeEncoder.encode("MATCH (u:Usuario {nome: 'João'})-[:FAVORITO]->(r:Restaurante) " +
@@ -84,7 +84,7 @@ public class RedisGraphExample implements Example {
 
             // Consulta 2: Todos os usuários que gostam de um restaurante específico
             System.out.println("\n2. Usuários que gostam do Pizza Hut:");
-            Object restaurantLovers = jedis.sendCommand(
+            var restaurantLovers = jedis.sendCommand(
                     () -> SafeEncoder.encode("GRAPH.QUERY"),
                     SafeEncoder.encode("foodDelivery"),
                     SafeEncoder.encode("MATCH (u:Usuario)-[:FAVORITO]->(r:Restaurante {nome: 'Pizza Hut'}) " +
@@ -94,7 +94,7 @@ public class RedisGraphExample implements Example {
 
             // Consulta 3: Recomendações baseadas em relacionamentos
             System.out.println("\n3. Recomendações para o João (baseado nos gostos de usuários similares):");
-            Object recommendations = jedis.sendCommand(
+            var recommendations = jedis.sendCommand(
                     () -> SafeEncoder.encode("GRAPH.QUERY"),
                     SafeEncoder.encode("foodDelivery"),
                     SafeEncoder.encode("MATCH (joao:Usuario {nome: 'João'})-[:FAVORITO]->(r:Restaurante)<-[:FAVORITO]-(outro:Usuario) " +
@@ -107,7 +107,7 @@ public class RedisGraphExample implements Example {
 
             // Consulta 4: Restaurantes por tipo de cozinha
             System.out.println("\n4. Todos os restaurantes italianos:");
-            Object italianRestaurants = jedis.sendCommand(
+            var italianRestaurants = jedis.sendCommand(
                     () -> SafeEncoder.encode("GRAPH.QUERY"),
                     SafeEncoder.encode("foodDelivery"),
                     SafeEncoder.encode("MATCH (r:Restaurante {cozinha: 'italiana'}) " +
@@ -117,21 +117,21 @@ public class RedisGraphExample implements Example {
 
             // Consulta 5: Estatísticas do grafo
             System.out.println("\n5. Estatísticas do grafo:");
-            Object stats = jedis.sendCommand(
+            var stats = jedis.sendCommand(
                     () -> SafeEncoder.encode("GRAPH.QUERY"),
                     SafeEncoder.encode("foodDelivery"),
                     SafeEncoder.encode("MATCH (u:Usuario) RETURN COUNT(u) as total_usuarios")
             );
             processGraphResult(stats);
 
-            Object stats2 = jedis.sendCommand(
+            var stats2 = jedis.sendCommand(
                     () -> SafeEncoder.encode("GRAPH.QUERY"),
                     SafeEncoder.encode("foodDelivery"),
                     SafeEncoder.encode("MATCH (r:Restaurante) RETURN COUNT(r) as total_restaurantes")
             );
             processGraphResult(stats2);
 
-            Object stats3 = jedis.sendCommand(
+            var stats3 = jedis.sendCommand(
                     () -> SafeEncoder.encode("GRAPH.QUERY"),
                     SafeEncoder.encode("foodDelivery"),
                     SafeEncoder.encode("MATCH ()-[f:FAVORITO]->() RETURN COUNT(f) as total_favoritos")
@@ -151,7 +151,7 @@ public class RedisGraphExample implements Example {
             return;
         }
 
-        List<Object> resultList = (List<Object>) result;
+        var resultList = (List<Object>) result;
 
         if (resultList.isEmpty()) {
             System.out.println("\t Nenhum resultado encontrado.");
@@ -161,13 +161,13 @@ public class RedisGraphExample implements Example {
 
         // Processar cada item do resultado
         for (int i = 0; i < resultList.size(); i++) {
-            List<Object> item = (List<Object>) resultList.get(i);
+            var item = (List<Object>) resultList.get(i);
             for (int j = 0; j < item.size(); j++) {
-                Object item_value = item.get(j);
+                var item_value = item.get(j);
 
                 if (item_value instanceof byte[]) {
                     // É uma string simples
-                    String data = SafeEncoder.encode((byte[]) item_value);
+                    var data = SafeEncoder.encode((byte[]) item_value);
                     System.out.println("\t Dado: " + data);
                 } else if (item_value instanceof List) {
                     // É uma lista (pode ser uma linha de resultados)

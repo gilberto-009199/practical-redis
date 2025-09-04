@@ -27,7 +27,7 @@ public class Main {
         var pool = new JedisPool(redisHost, redisPort);
 
         // 1. Redis Search example
-        //new RedisSearchExample().example(pool);
+        new RedisSearchExample().example(pool);
 
         // 2. Redis Graph Example
         new RedisGraphExample().example(pool);
