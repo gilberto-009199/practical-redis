@@ -2,18 +2,15 @@ package com.example;
 
 import redis.clients.jedis.JedisPool;
 
-import redis.clients.jedis.search.Document;
-import redis.clients.jedis.search.SearchResult;
 import redis.clients.jedis.util.SafeEncoder;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 
-public class RedisSearch implements Example {
+public class RedisSearchExample implements Example {
 
     @Override
     public void example(JedisPool pool) {

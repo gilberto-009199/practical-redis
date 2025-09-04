@@ -9,7 +9,8 @@ public class Main {
     public static void main( String[] args ){
 
         var redis = new GenericContainer<>(
-                DockerImageName.parse("redis")
+                // @atencao redis stack vem com Graph
+                DockerImageName.parse("redislabs/redismod")
         )
         .withExposedPorts(6379);
 
@@ -26,8 +27,10 @@ public class Main {
         var pool = new JedisPool(redisHost, redisPort);
 
         // 1. Redis Search example
-        new RedisSearch().example(pool);
+        //new RedisSearchExample().example(pool);
 
+        // 2. Redis Graph Example
+        new RedisGraphExample().example(pool);
 
         pool.close();
         redis.stop();
